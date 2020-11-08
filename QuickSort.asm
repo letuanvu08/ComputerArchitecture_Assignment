@@ -5,7 +5,7 @@ size: .word 50
 endl: .asciiz "\n"
 space: .asciiz " "
 .text
-la $a1,Array		#Load dia chi Array vào $a1
+la $a1,Array		#Load dia chi Array vï¿½o $a1
 li $a2,0		#Index thap nhat
 li $a3,49		#Index cao nhat
 
@@ -99,23 +99,23 @@ partion:
 	jr $ra
 #--------------------Quicksort(int arr[]($a1) , int low($a2) , int high($a3) )-----------------------	#
 quicksort:
-	addi $sp,$sp,-16       				#---------------------------------------------	#   
-	sw $a1, 0($sp)          			# Luu a1,a2,a3,ra vao Stack			#
-	sw $a2, 4($sp)          			# de su dung de qui				#
-	sw $a3, 8($sp)          			#						#
-	sw $ra, 12($sp)         			#						#
+	addi $sp,$sp,-12       				#---------------------------------------------	#   
+	      						# Luu a2,a3,ra vao Stack			#
+	sw $a2, 0($sp)          			# de su dung de qui				#
+	sw $a3, 4($sp)          			#						#
+	sw $ra, 8($sp)         			#						#
 	ble $a3,$a2,exit            			# if (low ($a2) < high ($a3) )     		#      		
 	jal partion					# $v0 = partion					#
 	subi $a3,$v0,1					#						#
 	jal quicksort           			# De qui quickSort(arr[] , low , $v0 - 1)	#
 	addi $a2,$v0,1					# 						#
-	lw $a3,8($sp)					# Lay lai $a3 tu Stack				#
+	lw $a3,4($sp)					# Lay lai $a3 tu Stack				#
 	jal quicksort					# De qui quickSort(arr, $v0 + 1, high)		#
 	exit:                                        	# 						#
-	lw $a2,4($sp)					# Lay lai cac gia tri $a2,$a3,$ra tu Stack	#
-	lw $a3,8($sp)					#						#		
-	lw $ra,12($sp)					#						#
-	addi $sp,$sp,16					# Resize Stack					#
+	lw $a2,0($sp)					# Lay lai cac gia tri $a2,$a3,$ra tu Stack	#
+	lw $a3,4($sp)					#						#		
+	lw $ra,8($sp)					#						#
+	addi $sp,$sp,12					# Resize Stack					#
 	jr $ra						#---------------------------------------------	#
 #------------------------------Ham Print in cac phan tu cua mang-------------------------------------#
 print:
